@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool Gamez - Play Something Fun</title>
+<style>
+:root {
+  --bg: #0d0f14;
+  --panel: #171a22;
+  --border: #272b36;
+  --text: #f5f6fa;
+  --muted: #9298a8;
+  --accent: #8175ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  border-bottom: 1px solid var(--border);
+  background: #11131a;
+}
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+}
+.logo span { color: var(--accent); }
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 22px;
+  font-size: 14px;
+}
+nav a:hover { color: white; }
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 45px 22px;
+}
+.hero {
+  background: linear-gradient(120deg,#242044,#171a2a);
+  border: 1px solid #353052;
+  border-radius: 20px;
+  padding: 42px;
+  margin-bottom: 35px;
+}
+.hero h1 {
+  font-size: clamp(30px,5vw,48px);
+  margin: 0 0 12px;
+}
+.hero p { color: #b5b3ca; }
+.search {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  padding: 16px;
+  margin-top: 25px;
+  background: #10121b;
+  color: white;
+  border: 1px solid #45415f;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+.search:focus { border-color: var(--accent); }
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.section-title h2 { font-size: 22px; }
+.filters {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+.filter {
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--panel);
+  border-radius: 30px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.filter.active, .filter:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(210px,1fr));
+  gap: 18px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+.art {
+  height: 135px;
+  display: grid;
+  place-items: center;
+  font-size: 55px;
+  background: linear-gradient(135deg,#282744,#202b3c);
+}
+.card:nth-child(2) .art { background: linear-gradient(135deg,#233e39,#182c35); }
+.card:nth-child(3) .art { background: linear-gradient(135deg,#463128,#29213c); }
+.card:nth-child(4) .art { background: linear-gradient(135deg,#283c54,#262343); }
+.details { padding: 15px; }
+.details h3 { margin: 0 0 7px; }
+.details p { color: var(--muted); font-size: 13px; margin: 0 0 15px; }
+.play {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+.play:hover { background: #6c60e8; }
+.empty {
+  display: none;
+  color: var(--muted);
+  text-align: center;
+  padding: 45px;
+  grid-column: 1/-1;
+}
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 55px;
+}
+@media(max-width:600px) {
+  header { padding: 0 18px; }
+  nav a { margin-left: 10px; font-size: 12px; }
+  .hero { padding: 27px 20px; }
+  main { padding: 28px 15px; }
+  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
+  .art { height: 105px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Cool<span>Gamez</span></div>
+  <nav>
+    <a href="#games">Games</a>
+    <a href="#categories">Categories</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Play something fun.</h1>
+    <p>Your games. Your space. All in one place.</p>
+    <input id="search" class="search"
+      type="search" placeholder="Search games...">
+  </section>
+
+  <section id="games">
+    <div class="section-title">
+      <h2>Explore games</h2>
+    </div>
+
+    <div class="filters" id="categories">
+      <button class="filter active" data-category="all">All games</button>
+      <button class="filter" data-category="puzzle">Puzzle</button>
+      <button class="filter" data-category="arcade">Arcade</button>
+      <button class="filter" data-category="strategy">Strategy</button>
+    </div>
+
+    <div class="grid" id="gameGrid">
+
+      <article class="card" data-category="puzzle" data-name="2048">
+        <div class="art">🔢</div>
+        <div class="details">
+          <h3>2048</h3>
+          <p>Puzzle · Number game</p>
+          <a class="play" href="https://play2048.co/"
+             target="_blank" rel="noopener noreferrer">Play game ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-category="arcade" data-name="hextris">
+        <div class="art">🔷</div>
+        <div class="details">
+          <h3>Hextris</h3>
+          <p>Arcade · Puzzle</p>
+          <a class="play" href="https://hextris.io/"
+             target="_blank" rel="noopener noreferrer">Play game ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-category="strategy" data-name="little alchemy 2">
+        <div class="art">🧪</div>
+        <div class="details">
+          <h3>Little Alchemy 2</h3>
+          <p>Strategy · Discovery</p>
+          <a class="play" href="https://littlealchemy2.com/"
+             target="_blank" rel="noopener noreferrer">Play game ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-category="puzzle" data-name="wordle">
+        <div class="art">🔤</div>
+        <div class="details">
+          <h3>Wordle</h3>
+          <p>Puzzle · Word game</p>
+          <a class="play" href="https://www.nytimes.com/games/wordle/index.html"
+             target="_blank" rel="noopener noreferrer">Play game ↗</a>
+        </div>
+      </article>
+
+      <div class="empty" id="empty">No games found. Try another search!</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  CoolGamez · A place to play.
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".card")];
+const filters = [...document.querySelectorAll(".filter")];
+const empty = document.getElementById("empty");
+
+let category = "all";
+
+function updateGames() {
+  const query = search.value.toLowerCase().trim();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchesName = card.dataset.name.includes(query);
+    const matchesCategory =
+      category === "all" || card.dataset.category === category;
+
+    const show = matchesName && matchesCategory;
+    card.style.display = show ? "" : "none";
+    if (show) visible++;
+  });
+
+  empty.style.display = visible ? "none" : "block";
+}
+
+search.addEventListener("input", updateGames);
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    category = button.dataset.category;
+    filters.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    updateGames();
+  });
+});
+</script>
+
+</body>
+</html>
